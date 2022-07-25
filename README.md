@@ -7,4 +7,5 @@ A project showcasing how to build a clean API using ASP.NET Core
 - [ ] Validation
 - [ ] Services
 - [ ] Database
-- and more...
+
+and more...
