@@ -1,0 +1,3 @@
+﻿### Get all users
+GET https://localhost:5001/customers
+Accept: application/json
