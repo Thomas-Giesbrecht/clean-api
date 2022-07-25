@@ -2,8 +2,8 @@
 A project showcasing how to build a clean API using ASP.NET Core
 
 ## Features
-- [ ] FastApi
-- [ ] Swagger
+- [x] FastApi
+- [x] Swagger
 - [ ] Validation
 - [ ] Services
 - [ ] Database
