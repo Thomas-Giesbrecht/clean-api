@@ -11,8 +11,8 @@ POST https://localhost:5001/customers
 Content-Type: application/json
 
 {
-  "username": "nickchapsas",
-  "fullName": "Nick Chapsas",
-  "email": "nick@nickchapsas.com",
-  "dateOfBirth": "1993-04-20"
+  "username": "thomasgiesbrecht",
+  "fullName": "Thomas Giesbrecht",
+  "email": "thomas@thomasgiesbrecht.com",
+  "dateOfBirth": "2022-07-26"
 }
