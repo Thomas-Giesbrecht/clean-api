@@ -11,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddFastEndpoints();
 builder.Services.AddSwaggerDoc();
 
-builder.Services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory("connectionstring"));
+builder.Services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory("Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=postgres;"));
+builder.Services.AddSingleton<DatabaseInitializer>();
+
 builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
 builder.Services.AddSingleton<ICustomerService, CustomerService>();
 
@@ -31,6 +33,9 @@ app.UseFastEndpoints(x =>
 
 app.UseOpenApi();
 app.UseSwaggerUi3(x => x.ConfigureDefaults());
+
+var databaseInitializer = app.Services.GetRequiredService<DatabaseInitializer>();
+await databaseInitializer.InitializeAsync();
 
 app.UseHttpsRedirection();
 app.Run();
