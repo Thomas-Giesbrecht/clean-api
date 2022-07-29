@@ -8,4 +8,6 @@ A project showcasing how to build a clean API using FastEndpoints in ASP.NET Cor
 - [x] Database Integration
 
 ## Getting Started
-- `docker-compose up -d` to launch the database
+- launch database `docker-compose up -d`
+- launch Customers.Api
+- access the API via [Swagger UI](https://localhost:5001/swagger/index.html)
