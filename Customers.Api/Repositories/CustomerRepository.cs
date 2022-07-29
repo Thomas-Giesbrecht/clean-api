@@ -23,13 +23,16 @@ public class CustomerRepository : ICustomerRepository
         return result > 0;
     }
 
-    public Task<CustomerDto?> GetAsync(Guid id)
+    public async Task<CustomerDto?> GetAsync(Guid id)
     {
-        throw new NotImplementedException();
+        using var connection = await _connectionFactory.CreateConnectionAsync();
+        return await connection.QuerySingleOrDefaultAsync<CustomerDto>(
+            "SELECT * FROM Customers WHERE Id = @Id LIMIT 1", new { Id = id.ToString() });
     }
 
-    public Task<IEnumerable<CustomerDto>> GetAllAsync()
+    public async Task<IEnumerable<CustomerDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        using var connection = await _connectionFactory.CreateConnectionAsync();
+        return await connection.QueryAsync<CustomerDto>("SELECT * FROM Customers");
     }
 }
