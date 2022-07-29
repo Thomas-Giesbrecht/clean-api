@@ -1,6 +1,21 @@
-﻿namespace Customers.Api.Database;
+﻿using System.Data;
+using Npgsql;
+
+namespace Customers.Api.Database;
 
 public class DbConnectionFactory : IDbConnectionFactory
 {
-    
+    private readonly string _connectionString;
+
+    public DbConnectionFactory(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
+    public async Task<IDbConnection> CreateConnectionAsync()
+    {
+        var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+        return connection;
+    }
 }

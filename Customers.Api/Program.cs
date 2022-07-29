@@ -1,4 +1,5 @@
 using Customers.Api.Contracts.Responses;
+using Customers.Api.Database;
 using Customers.Api.Repositories;
 using Customers.Api.Services;
 using Customers.Api.Validation;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddFastEndpoints();
 builder.Services.AddSwaggerDoc();
 
+builder.Services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory("connectionstring"));
 builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
 builder.Services.AddSingleton<ICustomerService, CustomerService>();
 
