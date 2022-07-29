@@ -1,4 +1,6 @@
 using Customers.Api.Contracts.Responses;
+using Customers.Api.Repositories;
+using Customers.Api.Services;
 using Customers.Api.Validation;
 using FastEndpoints;
 using FastEndpoints.Swagger;
@@ -7,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddFastEndpoints();
 builder.Services.AddSwaggerDoc();
+
+builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
+builder.Services.AddSingleton<ICustomerService, CustomerService>();
 
 var app = builder.Build();
 
