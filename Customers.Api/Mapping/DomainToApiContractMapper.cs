@@ -16,4 +16,19 @@ public static class DomainToApiContractMapper
             DateOfBirth = customer.DateOfBirth.Value.ToDateTime(TimeOnly.MinValue)
         };
     }
+    
+    public static GetAllCustomersResponse ToCustomersResponse(this IEnumerable<Customer> customers)
+    {
+        return new GetAllCustomersResponse
+        {
+            Customers = customers.Select(x => new CustomerResponse
+            {
+                Id = x.Id.Value,
+                Email = x.Email.Value,
+                Username = x.Username.Value,
+                FullName = x.FullName.Value,
+                DateOfBirth = x.DateOfBirth.Value.ToDateTime(TimeOnly.MinValue)
+            })
+        };
+    }
 }
