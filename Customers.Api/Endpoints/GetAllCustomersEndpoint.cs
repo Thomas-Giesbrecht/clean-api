@@ -1,4 +1,6 @@
 ﻿using Customers.Api.Contracts.Responses;
+using Customers.Api.Mapping;
+using Customers.Api.Services;
 using FastEndpoints;
 using Microsoft.AspNetCore.Authorization;
 
@@ -7,22 +9,20 @@ namespace Customers.Api.Endpoints;
 [HttpGet("customers"), AllowAnonymous]
 public class GetAllCustomersEndpoint : EndpointWithoutRequest<GetAllCustomersResponse>
 {
+    private readonly ICustomerService _customerService;
+    
+    public GetAllCustomersEndpoint(ICustomerService customerService)
+    {
+        _customerService = customerService;
+    }
+    
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var customer = new CustomerResponse()
-        {
-            Id = Guid.NewGuid(),
-            Username = "Thomas-Giesbrecht",
-            FullName = "Thomas Giesbrecht",
-            Email = "mail@gmail.com",
-            DateOfBirth = new DateTime(2022, 7, 25)
-        };
-
-        var response = new GetAllCustomersResponse
-        {
-            Customers = new List<CustomerResponse> {customer}
-        };
-        
-        await SendOkAsync(response, ct);
+        var customers = await _customerService.GetAllAsync();
+        var customersResponse = customers.ToCustomersResponse();
+        await SendOkAsync(customersResponse, ct);
     }
+
+
+
 }
