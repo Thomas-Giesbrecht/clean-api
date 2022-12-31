@@ -6,6 +6,7 @@ A project showcasing how to build a clean API using FastEndpoints in ASP.NET Cor
 - [x] API documentation using [SwaggerUI](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 - [x] Validation with [ValueOf](https://github.com/mcintyre321/ValueOf/) and custom Validators
 - [x] Database Integration
+- [x] Structured Dependency Injection
 
 ## Getting Started
 - launch database `docker-compose up -d`
