@@ -1,21 +1,15 @@
+using Customers.Api.Configuration;
 using Customers.Api.Contracts.Responses;
 using Customers.Api.Database;
-using Customers.Api.Repositories;
-using Customers.Api.Services;
 using Customers.Api.Validation;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddFastEndpoints();
-builder.Services.AddSwaggerDoc();
-
-builder.Services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory("Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=postgres;"));
-builder.Services.AddSingleton<DatabaseInitializer>();
-
-builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
-builder.Services.AddSingleton<ICustomerService, CustomerService>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
+builder.Services.AddPresentation();
 
 var app = builder.Build();
 
